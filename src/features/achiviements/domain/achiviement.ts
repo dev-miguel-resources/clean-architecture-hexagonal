@@ -6,8 +6,8 @@ export interface Achiviement {
     date: Date
 }
 
-export interface User {
+/*export interface User {
     id: Id
     name: string
     lastname: string
-}
+}*/

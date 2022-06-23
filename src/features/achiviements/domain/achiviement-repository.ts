@@ -1,5 +1,5 @@
-import { Achiviement } from "./achiviement";
+import { Achiviement } from './achiviement'
+import { FindableAll } from '../../../core/repositories/findable-all'
 
-export interface AchiviementRepository {
-
-} 
+// Design Pattern: Composition
+export interface AchiviementRepository extends FindableAll<Achiviement> {}
