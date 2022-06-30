@@ -1,3 +1,4 @@
+import 'reflect-metadata' // a nivel global
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";

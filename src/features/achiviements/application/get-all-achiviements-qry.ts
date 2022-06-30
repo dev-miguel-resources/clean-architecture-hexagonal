@@ -1,7 +1,7 @@
 import { Achiviement } from '../domain/achiviement'
 import { AchiviementRepository } from '../domain/achiviement-repository'
 
-export class GetAllAchiviementsUseCase {
+export class GetAllAchiviementsQry {
   // Pricipio SOLID: IOC (Inversión de Control)
   //  Design Pattern: Orquestación
   //  Polimorfismo
