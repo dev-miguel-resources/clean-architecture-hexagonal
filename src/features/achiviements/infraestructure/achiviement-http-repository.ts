@@ -1,7 +1,9 @@
 import { AchiviementDto } from './achiviement-dto'
 import { Achiviement } from '../domain/achiviement'
 import { AchiviementRepository } from '../domain/achiviement-repository'
+import { injectable } from 'tsyringe'
 
+@injectable()
 export class AchiviementHttpRepository implements AchiviementRepository {
   async findAll(): Promise<Achiviement[]> {
     const achiviementDtos: AchiviementDto[] = [

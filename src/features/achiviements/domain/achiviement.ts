@@ -1,9 +1,9 @@
-import { Id } from "../../../core/types/id"
+import { Id } from '../../../core/types/id'
 
 export interface Achiviement {
-    id: Id
-    name: string
-    date: Date
+  id: Id
+  name: string
+  date: Date
 }
 
 /*export interface User {
