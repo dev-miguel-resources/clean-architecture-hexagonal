@@ -1,10 +1,11 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { GetAllAchiviementsQry } from './features/achiviements/application/get-all-achiviements-qry'
-import { container } from "./core/dependency-injection/container"
-import logo from './logo.svg'
-import './App.css'
+import { container } from './core/dependency-injection/container'
+import styles from './app.module.css'
+import { Achiviement } from './features/achiviements/domain/achiviement'
 
 const App: FC = () => {
+  const [achiviements, setAchiviements] = useState<Achiviement[]>([])
 
   useEffect(() => {
     fetchData()
@@ -13,25 +14,19 @@ const App: FC = () => {
   async function fetchData() {
     const getAllAchiviementsQry = container.resolve(GetAllAchiviementsQry)
     const results = await getAllAchiviementsQry.execute()
-    console.log(results)
+    setAchiviements(results)
+    //console.log(results)
   }
-  
-  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className={styles.container}>
+      <div>
+        {achiviements.map(x => (
+          <p key={x.id}>{x.name}</p>
+        ))}
+      </div>
+    </main>
   )
 }
 
 export default App
-
-
