@@ -7,15 +7,12 @@ import { HTTP_CLIENT } from '../../../core/dependency-injection/injection-tokens
 
 @injectable()
 export class AchiviementHttpRepository implements AchiviementRepository {
-  
-  private static readonly URL = '/achiviements'
+  private static readonly URL = '/achievements'
 
   constructor(@inject(HTTP_CLIENT) private readonly httpClient: HttpClient) {}
 
   async findAll(): Promise<Achiviement[]> {
-    const achiviementDtos: AchiviementDto[] = [
-      { id: 'sfn-sfin-aseb', name: 'Learn Hexagonal Architecture with TS', date: '2022-06-22' },
-    ]
-    return achiviementDtos.map(x => ({ ...x, date: new Date(x.date) }))
+    const response = await this.httpClient.get<AchiviementDto[]>(AchiviementHttpRepository.URL)
+    return response.data.map(x => ({ ...x, date: new Date(x.date) }))
   }
 }

@@ -1,6 +1,6 @@
 import { container } from './container'
-import { InjectionToken } from "tsyringe";
+import { InjectionToken } from 'tsyringe'
 
 export function useDi<T>(injectionToken: InjectionToken<T>) {
-    return container.resolve(injectionToken)
+  return container.resolve(injectionToken)
 }
