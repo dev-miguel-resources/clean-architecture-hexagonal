@@ -3,9 +3,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
+import { worker } from './mocks/browser'
 
 if (process.env.NODE_ENV === 'development') {
-  // por habilitar worker
+  worker.start()
 }
 
 ReactDOM.render(

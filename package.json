@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "start": "env-cmd -f .env.local craco start",
+    "test": "react-scripts test",
     "build": "craco build",
     "build:dev": "env-cmd -f .env.dev craco build",
     "build:pro": "env-cmd -f .env.pro craco build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "format": "prettier --ignore-path .gitignore --write ."
   },
   "dependencies": {
@@ -64,6 +63,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "msw": {
+    "workerDirectory": "public"
   },
   "simple-git-hooks": {
     "pre-commit": "npx pretty-quick --staged"

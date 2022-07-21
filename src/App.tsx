@@ -15,7 +15,6 @@ const App: FC = () => {
     const getAllAchiviementsQry = container.resolve(GetAllAchiviementsQry)
     const results = await getAllAchiviementsQry.execute()
     setAchiviements(results)
-    //console.log(results)
   }
 
   return (
