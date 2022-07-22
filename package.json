@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "start": "env-cmd -f .env.local craco start",
-    "test": "react-scripts test",
     "build": "craco build",
     "build:dev": "env-cmd -f .env.dev craco build",
     "build:pro": "env-cmd -f .env.pro craco build",
+    "test": "react-scripts test",
+    "test:e2e:open": "npx cypress open",
+    "test:e2e:run": "cypress run",
     "format": "prettier --ignore-path .gitignore --write ."
   },
   "dependencies": {

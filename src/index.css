@@ -5,7 +5,7 @@
 }
 
 :root {
-  --primary-color: green;
+  --primary-color: rgb(7, 7, 170);
   --on-primary-color: white;
 
   --background-color: white;
