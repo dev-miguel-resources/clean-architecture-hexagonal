@@ -3,6 +3,7 @@ import { GetAllAchiviementsQry } from './features/achiviements/application/get-a
 import { container } from './core/dependency-injection/container'
 import styles from './app.module.css'
 import { Achiviement } from './features/achiviements/domain/achiviement'
+import { AchievementForm } from './features/achiviements/delivery/achievement-form'
 
 const App: FC = () => {
   const [achiviements, setAchiviements] = useState<Achiviement[]>([])
@@ -19,6 +20,7 @@ const App: FC = () => {
 
   return (
     <main className={styles.container}>
+      <AchievementForm />
       <div>
         {achiviements.map(x => (
           <p key={x.id}>{x.name}</p>

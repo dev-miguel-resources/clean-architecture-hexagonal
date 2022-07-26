@@ -38,7 +38,7 @@
     "@craco/craco": "6.3.0",
     "@types/classnames": "2.3.1",
     "babel-plugin-transform-typescript-metadata": "0.3.2",
-    "cypress": "8.5.0",
+    "cypress": "10.3.1",
     "env-cmd": "10.1.0",
     "eslint-plugin-cypress": "2.12.1",
     "msw": "0.35.0",
