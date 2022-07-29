@@ -9,7 +9,7 @@ export default defineConfig({
   e2e: {
     setupNodeEvents(_) {},
     baseUrl: 'http://localhost:3000',
-    specPattern: './e2e/specs/*.e2e.ts',
+    specPattern: './e2e/specs/**/*.e2e.ts',
     supportFile: false,
   },
 })

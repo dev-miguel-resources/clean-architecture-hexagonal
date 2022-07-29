@@ -1,10 +1,10 @@
 module.exports = {
   babel: {
     plugins: [
-      'babel-plugin-transform-typescript-metadata', // procesamiento de ts
-      ['@babel/plugin-proposal-decorators', { legacy: true }], // soporte para decoradores
-      ['@babel/plugin-proposal-class-properties', { loose: true }], // di para clases
+      'babel-plugin-transform-typescript-metadata',
+      ['@babel/plugin-proposal-decorators', { legacy: true }],
+      ['@babel/plugin-proposal-class-properties', { loose: true }],
     ],
-    presets: ['@babel/preset-typescript'], // específicar nuestra config a nuestro lenguaje
+    presets: ['@babel/preset-typescript'],
   },
 }

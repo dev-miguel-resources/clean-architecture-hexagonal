@@ -5,9 +5,3 @@ export interface Achiviement {
   name: string
   date: Date
 }
-
-/*export interface User {
-    id: Id
-    name: string
-    lastname: string
-}*/

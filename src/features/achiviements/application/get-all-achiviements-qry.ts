@@ -5,10 +5,6 @@ import type { AchiviementRepository } from '../domain/achiviement-repository'
 
 @injectable()
 export class GetAllAchiviementsQry {
-  // Pricipio SOLID: IOC (Inversión de Control)
-  //  Design Pattern: Orquestación
-  //  Polimorfismo
-
   constructor(@inject(ACHIVIEMENT_REPOSITORY) private readonly achiviementRepository: AchiviementRepository) {}
 
   execute(): Promise<Achiviement[]> {
