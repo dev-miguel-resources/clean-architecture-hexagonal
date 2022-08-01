@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
+    "start": "env-cmd -f .env.local craco start",
     "build": "craco build",
     "build:dev": "env-cmd -f .env.dev craco build",
     "build:pro": "env-cmd -f .env.pro craco build",
