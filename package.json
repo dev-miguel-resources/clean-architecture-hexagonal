@@ -9,7 +9,7 @@
     "build:pro": "env-cmd -f .env.pro craco build",
     "test": "react-scripts test --watchAll=false",
     "test:e2e:open": "npx cypress open",
-    "test:e2e:run": "cypress run && wait-on http://localhost:3000",
+    "test:e2e:run": "wait-on http://127.0.0.1:3000 && cypress run",
     "format": "prettier --ignore-path .gitignore --write ."
   },
   "dependencies": {
