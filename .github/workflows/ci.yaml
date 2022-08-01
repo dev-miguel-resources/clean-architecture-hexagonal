@@ -14,12 +14,16 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14.17.0'
-      - uses: actions/cache@v2
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v3
+        id: yarn-cache
         with:
-          path: ~/.yarn
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-yarn-
       - name: install
         run: yarn ci
       - name: test
