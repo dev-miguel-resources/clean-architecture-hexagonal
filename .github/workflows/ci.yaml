@@ -18,3 +18,11 @@ jobs:
       - name: Echo the message
         run: |
           echo 'Hello world guys!'
+      - name: install
+        run: yarn ci
+      - name: test
+        run: yarn run test
+      - name: test
+        run: yarn run test:e2e:run
+      - name: compile
+        run: yarn run build
