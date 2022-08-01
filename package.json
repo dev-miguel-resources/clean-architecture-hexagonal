@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "env-cmd -f .env.local craco start",
+    "start": "react-scripts start",
     "build": "craco build",
     "build:dev": "env-cmd -f .env.dev craco build",
     "build:pro": "env-cmd -f .env.pro craco build",
-    "test": "craco test",
+    "test": "react-scripts test --coverage --watchAll=false",
     "test:e2e:open": "npx cypress open",
     "test:e2e:run": "cypress run",
     "format": "prettier --ignore-path .gitignore --write ."
