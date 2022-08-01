@@ -31,6 +31,6 @@ jobs:
       - name: unitaries test
         run: yarn run test
       - name: e2e test
-        run: test:e2e:run
+        run: yarn run test:e2e:run
       - name: compile
         run: yarn run build
