@@ -30,6 +30,7 @@ jobs:
         run: yarn install
       - name: unitaries test
         run: yarn run test
+      - name: e2e test
         uses: cypress-io/github-action@v2
         with:
           command: yarn run test:e2e:run
