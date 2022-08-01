@@ -3,12 +3,11 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+
 jobs:
   ci:
     runs-on: ubuntu-18.04
     steps:
       - name: Echo the message
-        run: 'Hello world guys!'
+        run: |
+          echo 'Hello world guys!'
