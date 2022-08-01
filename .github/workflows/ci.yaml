@@ -30,7 +30,5 @@ jobs:
         run: yarn install
       - name: unitaries test
         run: yarn run test
-      - name: e2e test
-        run: yarn run test:e2e:run
       - name: compile
         run: yarn run build
