@@ -8,23 +8,7 @@ on:
       - main
 jobs:
   ci:
-    runs-on: windows-latest
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14.17.0'
-      - uses: actions/cache@v2
-        with:
-          path: ~/.yarn
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - name: install
-        run: yarn ci
-      - name: test
-        run: yarn run test
-      - name: test
-        run: yarn run test:e2e:run
-      - name: compile
-        run: yarn run build
+      - name: Echo the message
+        run: 'Hello world guys!'
