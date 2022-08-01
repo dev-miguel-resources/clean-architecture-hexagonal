@@ -12,12 +12,16 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
           node-version: '14.17.0'
       - name: Echo the message
         run: |
           echo 'Hello world guys!'
+      - name: Install dependencies
+        run: yarn install
       - name: test
         run: yarn run test
       - name: test
