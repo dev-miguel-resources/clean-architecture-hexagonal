@@ -22,7 +22,7 @@ jobs:
           echo 'Hello world guys!'
       - name: Install dependencies
         run: yarn install
-      - name: Run project
+      - name: Run project react
         run: yarn run start
       - name: unitaries test
         run: yarn run test
