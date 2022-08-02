@@ -1,5 +1,7 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
+//import { useDi } from '../../../core/dependency-injection/use-di'
+//import { CreateAchievementCmd } from '../application/create-achievement-cmd'
 
 interface Form {
   name: string
@@ -12,6 +14,11 @@ export const AchievementForm: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Form>()
+
+  /*const createAchievementCmd = useDi(CreateAchievementCmd)
+  const onSubmit = handleSubmit(data => {
+    createAchievementCmd.execute(data)
+  })*/
 
   const onSubmit = handleSubmit(data => {
     console.log(data)

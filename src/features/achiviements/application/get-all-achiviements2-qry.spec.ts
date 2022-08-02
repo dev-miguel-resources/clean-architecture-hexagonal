@@ -9,7 +9,7 @@ describe('GetAllAchiviementsUseCase', () => {
     const { achiviementRepository, getAllAchiviementsUseCase } = setup()
     when(achiviementRepository.findAll()).thenResolve([AchiviementMother.learnArchitecture()])
 
-    const actual = await getAllAchiviementsUseCase.execute()
+    const actual = await getAllAchiviementsUseCase.internalExecute()
 
     expect(actual).toEqual<Achiviement[]>([AchiviementMother.learnArchitecture()])
   })

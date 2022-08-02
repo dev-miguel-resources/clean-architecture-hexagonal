@@ -11,7 +11,7 @@ describe('GetAllAchiviementsUseCase', () => {
       { id: 'sfn-sfin-aseb', name: 'Learn Hexagonal Architecture with TS', date: new Date('2022-06-22') },
     ])
 
-    const actual = await getAllAchiviementsUseCase.execute()
+    const actual = await getAllAchiviementsUseCase.internalExecute()
 
     expect(actual).toEqual<Achiviement[]>([
       { id: 'sfn-sfin-aseb', name: 'Learn Hexagonal Architecture with TS', date: new Date('2022-06-22') },

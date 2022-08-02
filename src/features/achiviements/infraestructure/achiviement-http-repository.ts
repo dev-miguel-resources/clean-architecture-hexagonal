@@ -1,3 +1,4 @@
+import { CantCreateAchievementError } from './../domain/cant-create-achievement-error'
 import { Achiviement } from '../domain/achiviement'
 import { AchiviementDto } from './achiviement-dto'
 import { AchiviementRepository } from '../domain/achiviement-repository'
@@ -17,7 +18,19 @@ export class AchiviementHttpRepository implements AchiviementRepository {
     return response.data.map(x => ({ ...x, date: new Date(x.date) }))
   }
 
-  create(entity: AchievementCreate): Promise<void> {
-    throw new Error('Method not implemented.')
+  async create(achievementCreate: AchievementCreate): Promise<void> {
+    await this.httpClient.post<AchievementCreate>(AchiviementHttpRepository.URL, achievementCreate)
+    return
+  }
+
+  async createWithControlErrors(achievementCreate: AchievementCreate): Promise<void> {
+    try {
+      await this.httpClient.post<AchievementCreate>(AchiviementHttpRepository.URL, achievementCreate)
+    } catch (e) {
+      if (this.httpClient.isAxiosError(e) && e.code === '400') {
+        throw new CantCreateAchievementError()
+      }
+    }
+    return
   }
 }
