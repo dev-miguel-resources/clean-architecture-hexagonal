@@ -29,7 +29,7 @@ export const AchievementForm: FC = () => {
       <form onSubmit={onSubmit}>
         <label htmlFor="name">Name: </label>
         <input {...register('name', { required: true, minLength: 5 })} type="text" />
-        {errors.name?.type === 'required' && <span>Field is required</span>}
+        {errors.name?.type === 'required' && <span>Field name is required</span>}
         {errors.name?.type === 'minLength' && <span>Field name should have length 5</span>}
         <button type="submit">Submit</button>
       </form>
