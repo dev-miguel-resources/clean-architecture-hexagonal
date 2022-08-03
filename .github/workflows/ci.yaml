@@ -27,7 +27,7 @@ jobs:
         run: |
           echo 'Hello world guys!'
       - name: Install dependencies
-        run: yarn ci
+        run: yarn Install
       - name: unitaries test
         run: yarn run test
       - name: e2e test
