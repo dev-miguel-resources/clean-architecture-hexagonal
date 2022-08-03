@@ -30,8 +30,6 @@ jobs:
         run: yarn install
       - name: Eslint verify rules
         run: yarn run lint
-      - name: Eslint fix rules
-        run: yarn run lint.fix
       - name: unitaries test
         run: yarn run test
       - name: e2e test
