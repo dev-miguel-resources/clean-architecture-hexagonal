@@ -15,9 +15,13 @@ export const AchievementForm: FC = () => {
     formState: { errors },
   } = useForm<Form>()
 
-  const createAchievementCmd = useDi(CreateAchievementCmd)
+  /*const createAchievementCmd = useDi(CreateAchievementCmd)
   const onSubmit = handleSubmit(data => {
     createAchievementCmd.execute(data)
+  })*/
+
+  const onSubmit = handleSubmit(data => {
+    console.log(data)
   })
 
   return (
