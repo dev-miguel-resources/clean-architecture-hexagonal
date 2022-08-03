@@ -76,8 +76,5 @@
   },
   "msw": {
     "workerDirectory": "public"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "npx pretty-quick --staged"
   }
 }
