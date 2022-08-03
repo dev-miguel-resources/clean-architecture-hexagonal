@@ -1,6 +1,6 @@
 {
   "ignore": ["build", "node_modules", "coverage", "e2e", "cypress"],
   "events": {
-    "restart": "npm run lint"
+    "restart": "yarn run lint"
   }
 }

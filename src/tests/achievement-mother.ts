@@ -9,4 +9,7 @@ export class AchiviementMother {
   static learnArchitectureDto(): AchiviementDto {
     return { id: 'sfn-sfin-aseb', name: 'Learn Hexagonal Architecture with TS', date: '2022-06-22' }
   }
+  static learnArchitectureDto2(): AchiviementDto {
+    return { id: 'sfn-sfin-aseb', name: 'Learn Hexagonal Architecture with TS', date: '2022-06-22' }
+  }
 }
