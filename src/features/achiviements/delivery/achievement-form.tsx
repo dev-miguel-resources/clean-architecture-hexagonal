@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
-import { useDi } from '../../../core/dependency-injection/use-di'
-import { CreateAchievementCmd } from '../application/create-achievement-cmd'
+//import { useDi } from '../../../core/dependency-injection/use-di'
+//import { CreateAchievementCmd } from '../application/create-achievement-cmd'
 
 interface Form {
   name: string
