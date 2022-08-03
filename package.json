@@ -10,7 +10,6 @@
     "test": "react-scripts test --coverage --watchAll=false",
     "test:e2e:open": "npx cypress open",
     "test:e2e:run": "cypress run",
-    "format": "prettier --ignore-path .gitignore --write .",
     "lint": "eslint . --ext .{js,ts,tsx}",
     "lint.fix": "npx eslint --fix ."
   },
