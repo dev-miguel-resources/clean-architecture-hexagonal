@@ -10,7 +10,9 @@
     "test": "react-scripts test --coverage --watchAll=false",
     "test:e2e:open": "npx cypress open",
     "test:e2e:run": "cypress run",
-    "format": "prettier --ignore-path .gitignore --write ."
+    "format": "prettier --ignore-path .gitignore --write .",
+    "lint": "eslint . --ext .{js,ts,tsx}",
+    "lint.fix": "eslint . --ext .{js,ts,tsx} --fix"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
@@ -38,11 +40,15 @@
     "@babel/preset-typescript": "7.15.0",
     "@craco/craco": "6.3.0",
     "@types/classnames": "2.3.1",
+    "@typescript-eslint/eslint-plugin": "5.32.0",
+    "@typescript-eslint/parser": "5.32.0",
     "babel-plugin-transform-typescript-metadata": "0.3.2",
     "cypress": "10.3.1",
     "env-cmd": "10.1.0",
+    "eslint": "8.21.0",
     "eslint-plugin-cypress": "2.12.1",
     "msw": "0.35.0",
+    "nodemon": "2.0.19",
     "prettier": "2.4.1",
     "pretty-quick": "3.1.1",
     "reflect-metadata": "0.1.13",

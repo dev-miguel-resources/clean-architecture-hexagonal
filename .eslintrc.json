@@ -1,0 +1,16 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "quotes": ["warn", "double"],
+    "@typescript-eslint/no-explicit-any": ["warn", { "fixToUnknown": true }],
+    "curly": "error",
+    "no-empty": "error"
+  }
+}
