@@ -7,6 +7,7 @@ import { worker } from "./mocks/browser";
 import "./core/i18n/i18n";
 
 if (process.env.NODE_ENV === "development") {
+  worker.start();
 }
 
 const container = document.getElementById("root") as HTMLElement;
