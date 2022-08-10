@@ -20,9 +20,9 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: ~/.yarn
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Echo the message
         run: |
-          echo 'Hello guys from CI!'
+          echo '!Hello guys from CI!'
