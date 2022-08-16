@@ -25,4 +25,4 @@ jobs:
             ${{ runner.os }}-node-
       - name: Echo the message
         run: |
-          echo '!Hello guys from CI!'
+          echo '!Hello guys from CI integration!'
