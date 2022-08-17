@@ -28,3 +28,5 @@ jobs:
           echo '!Hello guys from CI in react with TS!'
       - name: Install dependencies
         run: yarn install
+      - name: Eslint verify rules
+        run: yarn run lint
