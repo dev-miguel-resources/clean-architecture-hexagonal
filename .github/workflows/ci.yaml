@@ -26,3 +26,5 @@ jobs:
       - name: Echo the message
         run: |
           echo '!Hello guys from CI in react with TS!'
+      - name: Install dependencies
+        run: yarn install
