@@ -1,5 +1,5 @@
-import { FC } from 'react'
-import { useForm } from 'react-hook-form'
+import { FC } from "react"
+import { useForm } from "react-hook-form"
 //import { useDi } from '../../../core/dependency-injection/use-di'
 //import { CreateAchievementCmd } from '../application/create-achievement-cmd'
 
@@ -28,9 +28,9 @@ export const AchievementForm: FC = () => {
     <section>
       <form onSubmit={onSubmit}>
         <label htmlFor="name">Name: </label>
-        <input {...register('name', { required: true, minLength: 5 })} type="text" />
-        {errors.name?.type === 'required' && <span>Field name is required</span>}
-        {errors.name?.type === 'minLength' && <span>Field name should have length 5</span>}
+        <input {...register("name", { required: true, minLength: 5 })} type="text" />
+        {errors.name?.type === "required" && <span>Field name is required</span>}
+        {errors.name?.type === "minLength" && <span>Field name should have length 5</span>}
         <button type="submit">Submit</button>
       </form>
     </section>

@@ -1,4 +1,4 @@
-import { Id } from '../../../core/types/id'
+import { Id } from "../../../core/types/id"
 
 export interface AchiviementDto {
   id: Id
