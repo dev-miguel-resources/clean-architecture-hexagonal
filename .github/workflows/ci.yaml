@@ -1,4 +1,4 @@
-name: CI Example
+name: CI Example Pipeline
 on:
   push:
     branches:
@@ -8,6 +8,14 @@ on:
       - main
 
 jobs:
+  avoid_reduncy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Cancel Previous Redundant Builds
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
   ci-message-and-linter:
     runs-on: ubuntu-20.04
     steps:
@@ -22,7 +30,7 @@ jobs:
         run: |
           echo '!Hello guys from CI in react with TS!'
       - name: Install dependencies
-        run: yarn ci
+        run: yarn install
       - name: Eslint verify rules
         run: yarn run lint
 
@@ -37,7 +45,7 @@ jobs:
           cache: "yarn"
           node-version: "14.17.0"
       - name: Install dependencies
-        run: yarn ci
+        run: yarn install
       - name: compile
         run: yarn run build
       - uses: actions/upload-artifact@v2
@@ -45,7 +53,7 @@ jobs:
           name: build
           path: build
 
-  test-unitary:
+  tests-unitaries:
     needs: [ci-message-and-linter, build]
     runs-on: ubuntu-20.04
     steps:
@@ -57,7 +65,7 @@ jobs:
           cache: "yarn"
           node-version: "14.17.0"
       - name: Install dependencies
-        run: yarn ci
+        run: yarn install
       - uses: actions/download-artifact@v2
         with:
           name: build
@@ -65,7 +73,7 @@ jobs:
       - name: unitaries test
         run: yarn run test
 
-  test-e2e:
+  tests-e2e:
     needs: [ci-message-and-linter, build]
     runs-on: ubuntu-20.04
     steps:
@@ -77,7 +85,7 @@ jobs:
           cache: "yarn"
           node-version: "14.17.0"
       - name: Install dependencies
-        run: yarn ci
+        run: yarn install
       - uses: actions/download-artifact@v2
         with:
           name: build
@@ -88,3 +96,20 @@ jobs:
           command: yarn run test:e2e:run
           start: yarn run start
           wait-on: http://localhost:3000
+
+  deploy-cloud:
+    needs: [tests-unitaries, tests-e2e]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Deploy to Heroku Cloud
+        if: ${{ github.event_name == "push" }}
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          healthcheck: "https://${{secrets.HEROKU_APP}}.herokuapp.com/health"
+          rollbackonhealthcheckfailed: true
