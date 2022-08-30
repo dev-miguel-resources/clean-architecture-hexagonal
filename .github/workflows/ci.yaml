@@ -1,5 +1,8 @@
 name: CI Example Pipeline
 on:
+  workflow_dispatch: # Putting here is also fine!!
+  release:
+    types: [created]
   push:
     branches:
       - main
@@ -111,3 +114,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
+          #healthcheck: "https://${{secrets.HEROKU_APP}}.herokuapp.com/health"
+          #checkstring: "ok"
+          #rollbackonhealthcheckfailed: true
