@@ -11,7 +11,8 @@
     "teste2e:open": "npx cypress open",
     "test:e2e:run": "cypress run",
     "lint": "eslint . --ext .{js,ts,tsx}",
-    "lint.fix": "npx eslint --fix ."
+    "lint.fix": "npx eslint --fix .",
+    "serve": "serve -s build"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",

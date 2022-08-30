@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: '14.17.0'
+          node-version: "14.17.0"
       - uses: actions/cache@v2
         with:
           path: ~/.yarn
@@ -30,13 +30,64 @@ jobs:
         run: yarn install
       - name: Eslint verify rules
         run: yarn run lint
+
+  test-unitary:
+    needs: [ci]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14.17.0"
+      - uses: actions/cache@v2
+        with:
+          path: ~/.yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: unitaries test
         run: yarn run test
+
+  test-e2e:
+    needs: [ci, test-unitary]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14.17.0"
+      - uses: actions/cache@v2
+        with:
+          path: ~/.yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: e2e test
         uses: cypress-io/github-action@v2
         with:
           command: yarn run test:e2e:run
           start: yarn run start
           wait-on: http://localhost:3000
+
+  build:
+    needs: [ci, test-unitary, test-e2e]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14.17.0"
+      - uses: actions/cache@v2
+        with:
+          path: ~/.yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: compile
         run: yarn run build
