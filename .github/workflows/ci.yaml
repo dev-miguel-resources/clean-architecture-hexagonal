@@ -46,6 +46,8 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: yarn install
       - name: compile
         run: yarn run build
       - uses: actions/upload-artifact@v2
@@ -68,6 +70,8 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: yarn install
       - uses: actions/download-artifact@v2
         with:
           path: build
@@ -90,6 +94,8 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: yarn install
       - uses: actions/download-artifact@v2
         with:
           path: build
