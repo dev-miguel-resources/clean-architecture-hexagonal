@@ -33,7 +33,7 @@ jobs:
         run: |
           echo '!Hello guys from CI in react with TS!'
       - name: Install dependencies
-        run: yarn
+        run: yarn install
       - name: Eslint verify rules
         run: yarn run lint
 
@@ -48,7 +48,7 @@ jobs:
           cache: "yarn"
           node-version: "14.17.0"
       - name: Install dependencies
-        run: yarn
+        run: yarn install
       - name: compile
         run: yarn run build
       - uses: actions/upload-artifact@v2
@@ -68,7 +68,7 @@ jobs:
           cache: "yarn"
           node-version: "14.17.0"
       - name: Install dependencies
-        run: yarn
+        run: yarn install
       - uses: actions/download-artifact@v2
         with:
           name: build
