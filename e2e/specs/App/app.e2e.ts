@@ -1,8 +1,12 @@
 import { AchiviementMother } from "../../../src/tests/achievement-mother"
 
+Cypress.on("uncaught:exception", (err, runnable) => {
+  // returning false here prevents Cypress from failing the test
+  return false
+})
+
 describe("App Test e2e", () => {
   it("should visit home and submit form", () => {
-    cy.once("uncaught:exception", () => false)
     cy.visit("http://localhost:3000/")
     cy.get("form").submit()
     cy.get("label")
