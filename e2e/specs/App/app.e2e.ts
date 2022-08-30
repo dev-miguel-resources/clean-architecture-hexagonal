@@ -5,7 +5,7 @@ describe("App Test e2e", () => {
     cy.visit("http://localhost:3000/")
     cy.get("form").submit()
     cy.get("label")
-    cy.get("input[name=name]").type("")
+    cy.get("input[name=name]").type("Mig")
     cy.get("button[type=submit]").click()
     cy.end()
   })
