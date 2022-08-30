@@ -33,7 +33,7 @@ jobs:
         run: |
           echo '!Hello guys from CI in react with TS!'
       - name: Install dependencies
-        run: yarn install
+        run: yarn
       - name: Eslint verify rules
         run: yarn run lint
 
@@ -48,7 +48,7 @@ jobs:
           cache: "yarn"
           node-version: "14.17.0"
       - name: Install dependencies
-        run: yarn install
+        run: yarn
       - name: compile
         run: yarn run build
       - uses: actions/upload-artifact@v2
@@ -68,7 +68,7 @@ jobs:
           cache: "yarn"
           node-version: "14.17.0"
       - name: Install dependencies
-        run: yarn install
+        run: yarn
       - uses: actions/download-artifact@v2
         with:
           name: build
@@ -88,7 +88,7 @@ jobs:
           cache: "yarn"
           node-version: "14.17.0"
       - name: Install dependencies
-        run: yarn install
+        run: yarn
       - uses: actions/download-artifact@v2
         with:
           name: build
@@ -100,7 +100,7 @@ jobs:
           start: yarn run start
           wait-on: http://localhost:3000
 
-  deploy-cloud:
+  deploy-cloud-heroku:
     needs: [tests-unitaries, tests-e2e]
     runs-on: ubuntu-20.04
     steps:
@@ -117,3 +117,13 @@ jobs:
           #healthcheck: "https://${{secrets.HEROKU_APP}}.herokuapp.com/health"
           #checkstring: "ok"
           #rollbackonhealthcheckfailed: true
+
+  deploy-cloud-ghpages:
+    needs: [tests-unitaries, tests-e2e]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Deploy to Gh-Pages
+        run: yarn run deploy

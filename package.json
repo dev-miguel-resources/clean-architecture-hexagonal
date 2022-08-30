@@ -2,17 +2,19 @@
   "name": "hexagonal",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://dev-miguel-resources.github.io/clean-architecture-hexagonal",
   "scripts": {
     "start": "env-cmd -f .env.local craco start",
     "build": "craco build",
     "build:dev": "env-cmd -f .env.dev craco build",
     "build:pro": "env-cmd -f .env.pro craco build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --watchAll=false",
     "teste2e:open": "npx cypress open",
     "test:e2e:run": "cypress run",
     "lint": "eslint . --ext .{js,ts,tsx}",
     "lint.fix": "npx eslint --fix .",
-    "serve": "serve -s build"
+    "serve": "serve -s build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
@@ -24,6 +26,7 @@
     "@types/react-dom": "18.0.6",
     "axios": "0.22.0",
     "classnames": "2.3.1",
+    "gh-pages": "4.0.0",
     "i18next": "21.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
