@@ -30,3 +30,13 @@ jobs:
         run: yarn install
       - name: Eslint verify rules
         run: yarn run lint
+      - name: unitaries test
+        run: yarn run test
+      - name: e2e test
+        uses: cypress-io/github-action@v2
+        with:
+          command: yarn run test:e2e:run
+          start: yarn run start
+          wait-on: http://localhost:3000
+      - name: compile
+        run: yarn run build
