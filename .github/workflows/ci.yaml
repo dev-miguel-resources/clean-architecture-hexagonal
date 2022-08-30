@@ -42,6 +42,7 @@ jobs:
         run: yarn run build
       - uses: actions/upload-artifact@v2
         with:
+          name: build
           path: build
 
   test-unitary:
@@ -59,6 +60,7 @@ jobs:
         run: yarn install
       - uses: actions/download-artifact@v2
         with:
+          name: build
           path: build
       - name: unitaries test
         run: yarn run test
@@ -78,6 +80,7 @@ jobs:
         run: yarn install
       - uses: actions/download-artifact@v2
         with:
+          name: build
           path: build
       - name: e2e test
         uses: cypress-io/github-action@v2
