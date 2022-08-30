@@ -8,7 +8,7 @@ on:
       - main
 
 jobs:
-  ci:
+  ci-message-and-linter:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -31,50 +31,7 @@ jobs:
       - name: Eslint verify rules
         run: yarn run lint
 
-  test-unitary:
-    needs: ci
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "14.17.0"
-      - uses: actions/cache@v2
-        with:
-          path: ~/.yarn
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - name: unitaries test
-        run: yarn run test
-
-  test-e2e:
-    needs: [ci, test-unitary]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "14.17.0"
-      - uses: actions/cache@v2
-        with:
-          path: ~/.yarn
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - name: e2e test
-        uses: cypress-io/github-action@v2
-        with:
-          command: yarn run test:e2e:run
-          start: yarn run start
-          wait-on: http://localhost:3000
-
   build:
-    needs: [ci, test-unitary, test-e2e]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -91,3 +48,54 @@ jobs:
             ${{ runner.os }}-node-
       - name: compile
         run: yarn run build
+      - uses: actions/upload-artifact@v2
+        with:
+          path: build
+
+  test-unitary:
+    needs: [ci-message-and-linter, build]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14.17.0"
+      - uses: actions/cache@v2
+        with:
+          path: ~/.yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - uses: actions/download-artifact@v2
+        with:
+          path: build
+      - name: unitaries test
+        run: yarn run test
+
+  test-e2e:
+    needs: [ci-message-and-linter, build]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14.17.0"
+      - uses: actions/cache@v2
+        with:
+          path: ~/.yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - uses: actions/download-artifact@v2
+        with:
+          path: build
+      - name: e2e test
+        uses: cypress-io/github-action@v2
+        with:
+          command: yarn run test:e2e:run
+          start: yarn run start
+          wait-on: http://localhost:3000
