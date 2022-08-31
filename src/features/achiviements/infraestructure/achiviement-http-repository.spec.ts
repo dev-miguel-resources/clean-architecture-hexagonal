@@ -1,14 +1,14 @@
-import { AchiviementHttpRepository } from "./achiviement-http-repository"
-import { instance, mock, when } from "ts-mockito"
-import { AchiviementMother } from "../../../tests/achievement-mother"
-import { HttpClient } from "../../../core/http-client/http-client"
-import { AxiosResponse } from "axios"
-import { Achiviement } from "./../domain/achiviement"
+import { AchiviementHttpRepository } from './achiviement-http-repository'
+import { instance, mock, when } from 'ts-mockito'
+import { AchiviementMother } from '../../../tests/achievement-mother'
+import { HttpClient } from '../../../core/http-client/http-client'
+import { AxiosResponse } from 'axios'
+import { Achiviement } from './../domain/achiviement'
 
-describe("AchievmentHttpRepository", () => {
-  it("should get the achievements", async () => {
+describe('AchievmentHttpRepository', () => {
+  it('should get the achievements', async () => {
     const { achievementHttpRepository, httpClient } = setup()
-    when(httpClient.get("/achievements")).thenResolve({
+    when(httpClient.get('/achievements')).thenResolve({
       data: [AchiviementMother.learnArchitectureDto()],
     } as AxiosResponse)
 

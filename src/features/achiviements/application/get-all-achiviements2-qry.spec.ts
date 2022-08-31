@@ -1,11 +1,11 @@
-import { AchiviementMother } from "../../../tests/achievement-mother"
-import { GetAllAchiviementsQry } from "./get-all-achiviements-qry"
-import { mock, instance, when } from "ts-mockito"
-import { AchiviementRepository } from "../domain/achiviement-repository"
-import { Achiviement } from "../domain/achiviement"
+import { AchiviementMother } from '../../../tests/achievement-mother'
+import { GetAllAchiviementsQry } from './get-all-achiviements-qry'
+import { mock, instance, when } from 'ts-mockito'
+import { AchiviementRepository } from '../domain/achiviement-repository'
+import { Achiviement } from '../domain/achiviement'
 
-describe("GetAllAchiviementsUseCase", () => {
-  it("should get all the achiviements", async () => {
+describe('GetAllAchiviementsUseCase', () => {
+  it('should get all the achiviements', async () => {
     const { achiviementRepository, getAllAchiviementsUseCase } = setup()
     when(achiviementRepository.findAll()).thenResolve([AchiviementMother.learnArchitecture()])
 

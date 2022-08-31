@@ -1,3 +1,3 @@
-import { Achiviement } from "./achiviement"
+import { Achiviement } from './achiviement'
 
-export type AchievementCreate = Omit<Achiviement, "id">
+export type AchievementCreate = Omit<Achiviement, 'id'>

@@ -1,8 +1,5 @@
-name: CI Example Pipeline
+name: CI Example
 on:
-  workflow_dispatch: # Putting here is also fine!!
-  release:
-    types: [created]
   push:
     branches:
       - main
@@ -11,15 +8,7 @@ on:
       - main
 
 jobs:
-  avoid_reduncy:
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Cancel Previous Redundant Builds
-        uses: styfle/cancel-workflow-action@0.9.1
-        with:
-          access_token: ${{ github.token }}
-
-  ci-message-and-linter:
+  ci:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -27,115 +16,17 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          cache: "yarn"
-          node-version: "14.17.0"
+          node-version: '14.17.0'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Echo the message
         run: |
-          echo '!Hello guys from CI in react with TS!'
+          echo 'Hello guys from CI!'
       - name: Install dependencies
         run: yarn install
       - name: Eslint verify rules
         run: yarn run lint
-
-  build:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          cache: "yarn"
-          node-version: "14.17.0"
-      - name: Install dependencies
-        run: yarn install
-      - name: compile
-        run: yarn run build
-      - uses: actions/upload-artifact@v2
-        with:
-          name: build
-          path: build
-
-  tests-unitaries:
-    needs: [ci-message-and-linter, build]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          cache: "yarn"
-          node-version: "14.17.0"
-      - name: Install dependencies
-        run: yarn install
-      - uses: actions/download-artifact@v2
-        with:
-          name: build
-          path: build
-      - name: unitaries test
-        run: yarn run test
-
-  tests-e2e:
-    needs: [ci-message-and-linter, build]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          cache: "yarn"
-          node-version: "14.17.0"
-      - name: Install dependencies
-        run: yarn install
-      - uses: actions/download-artifact@v2
-        with:
-          name: build
-          path: build
-      - name: e2e test
-        uses: cypress-io/github-action@v2
-        with:
-          command: yarn run test:e2e:run
-          start: yarn run start
-          wait-on: http://localhost:3000
-
-  deploy-cloud-heroku:
-    needs: [tests-unitaries, tests-e2e]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Deploy to Heroku Cloud
-        if: ${{ github.event_name == 'push' }}
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          #healthcheck: "https://${{secrets.HEROKU_APP}}.herokuapp.com/health"
-          #checkstring: "ok"
-          #rollbackonhealthcheckfailed: true
-
-  deploy-cloud-ghpages:
-    needs: [tests-unitaries, tests-e2e]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          cache: "yarn"
-          node-version: "14.17.0"
-      - name: Install and Build
-        run: |
-          yarn install
-          yarn run build
-      - name: Deploy to Gh-Pages
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        with:
-          github_token: ${{github.token}}
-          branch: gh-pages
-          folder: build
