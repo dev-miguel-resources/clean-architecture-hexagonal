@@ -1,8 +1,8 @@
-import { defineConfig } from 'cypress'
+import { defineConfig } from "cypress"
 
 export default defineConfig({
-  screenshotsFolder: './e2e/screenshots',
-  videosFolder: './e2e/videos',
+  screenshotsFolder: "./e2e/screenshots",
+  videosFolder: "./e2e/videos",
   fixturesFolder: false,
   watchForFileChanges: false,
   includeShadowDom: true,
@@ -10,8 +10,8 @@ export default defineConfig({
     setupNodeEvents() {
       // used for documentation but empty
     },
-    baseUrl: 'http://localhost:3000',
-    specPattern: './e2e/specs/**/*.e2e.ts',
+    baseUrl: "http://localhost:3000",
+    specPattern: "./e2e/specs/**/*.e2e.ts",
     supportFile: false,
   },
 })
