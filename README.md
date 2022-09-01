@@ -1,3 +1,7 @@
+# CI/CD Documentation Project
+
+[![CI Example Pipeline](https://github.com/dev-miguel-resources/clean-architecture-hexagonal/actions/workflows/ci.yaml/badge.svg)](https://github.com/dev-miguel-resources/clean-architecture-hexagonal/actions/workflows/ci.yaml)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
