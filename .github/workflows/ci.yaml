@@ -38,3 +38,5 @@ jobs:
           command: yarn run test:e2e:run
           start: yarn run start
           wait-on: http://localhost:3000
+      - name: compile build
+        run: yarn run build

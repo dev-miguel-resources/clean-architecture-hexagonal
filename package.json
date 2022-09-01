@@ -13,7 +13,8 @@
     "test:e2e:run": "cypress run",
     "format": "prettier --ignore-path .gitignore --write .",
     "lint": "eslint . --ext .{js,ts,tsx}",
-    "lint.fix": "npx eslint --fix ."
+    "lint.fix": "npx eslint --fix .",
+    "serve": "serve -s build"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
