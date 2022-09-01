@@ -33,5 +33,8 @@ jobs:
       - name: unitaries test
         run: yarn run test
       - name: e2e test
-        run: yarn run test:e2e:run
-        #uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v2
+        with:
+          command: yarn run test:e2e:run
+          start: yarn run start
+          wait-on: http://localhost:3000
