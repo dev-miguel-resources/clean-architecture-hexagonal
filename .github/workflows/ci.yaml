@@ -11,7 +11,15 @@ on:
       - main
 
 jobs:
-  ci:
+  avoid_redundancy:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Cancel Previous Redudant Builds
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+  ci-message-and-linter:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -19,13 +27,8 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
+          cache: "yarn"
           node-version: "14.17.0"
-      - uses: actions/cache@v2
-        with:
-          path: ~/.yarn
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
       - name: Echo the message
         run: |
           echo 'Hello guys from CI!'
@@ -33,13 +36,70 @@ jobs:
         run: yarn install
       - name: Eslint verify rules
         run: yarn run lint
+
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          cache: "yarn"
+          node-version: "14.17.0"
+      - name: Install dependencies
+        run: yarn install
+      - name: compile build
+        run: yarn run build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build
+
+  test-unitaries:
+    needs: [ci-message-and-linter, build]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          cache: "yarn"
+          node-version: "14.17.0"
+      - name: Install dependencies
+        run: yarn install
+      - name: compile build
+        run: yarn run build
+      - uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build
       - name: unitaries test
         run: yarn run test
+
+  tests-e2e:
+    needs: [ci-message-and-linter, build]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          cache: "yarn"
+          node-version: "14.17.0"
+      - name: Install dependencies
+        run: yarn install
+      - name: compile build
+        run: yarn run build
+      - uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build
       - name: e2e test
         uses: cypress-io/github-action@v2
         with:
           command: yarn run test:e2e:run
           start: yarn run start
           wait-on: http://localhost:3000
-      - name: compile build
-        run: yarn run build
