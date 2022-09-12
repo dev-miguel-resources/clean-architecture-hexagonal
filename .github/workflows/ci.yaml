@@ -103,3 +103,23 @@ jobs:
           command: yarn run test:e2e:run
           start: yarn run start
           wait-on: http://localhost:3000
+
+  deploy-heroku-cloud:
+    needs: [test-unitaries, tests-e2e]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Deploy to Heroku Cloud
+        if: ${{ github.event_name == 'push' }}
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          #healthcheck: "https://${{secrets.HEROKU_SERVER}}.herokuapp.com/health"
+          #checkstring: "ok"
+          #rollbackonhealthcheckfailed: true
+          #delay: 3
+          #procfile: web: yarn start
