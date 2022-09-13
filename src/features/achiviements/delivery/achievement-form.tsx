@@ -30,7 +30,7 @@ export const AchievementForm: FC = () => {
         <label htmlFor="name">Name: </label>
         <input {...register("name", { required: true, minLength: 5 })} type="text" />
         {errors.name?.type === "required" && <span>Field name is required</span>}
-        {errors.name?.type === "minLength" && <span>Field name should have length 5</span>}
+        {errors.name?.type === "minLength" && <span>Field name should have length 5 characters</span>}
         <button type="submit">Submit</button>
       </form>
     </section>
