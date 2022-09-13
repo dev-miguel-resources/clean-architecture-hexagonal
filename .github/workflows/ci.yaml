@@ -124,35 +124,3 @@ jobs:
           #delay: 3
           #procfile: web: yarn start
           #branch: main
-
-  deploy-netlify-cloud:
-    needs: [test-unitaries, tests-e2e]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Install dependencies
-        run: yarn install
-      - name: compile build
-        run: yarn run build
-      - uses: actions/download-artifact@v2
-        with:
-          name: build
-          path: build
-      - name: Deploy to Netlify Cloud
-        if: ${{ github.event_name == 'push' }}
-      - uses: nwtgck/actions-netlify@v1.2
-        with:
-          publish-dir: "./build"
-          production-branch: main
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy from GitHub Actions"
-          enable-pull-request-comment: false
-          enable-commit-comment: true
-          overwrites-pull-request-comment: true
-          fails-without-credentials: true
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 2
