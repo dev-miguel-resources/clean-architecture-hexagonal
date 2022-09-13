@@ -134,8 +134,17 @@ jobs:
           fetch-depth: 0
       - name: Deploy to Netlify Cloud
         if: ${{ github.event_name == 'push' }}
-        uses: nwtgck/actions-netlify@v1.2
+      - name: Install dependencies
+        run: yarn install
+      - name: compile build
+        run: yarn run build
+      - uses: actions/download-artifact@v2
         with:
+          name: build
+          path: build
+      - uses: nwtgck/actions-netlify@v1.2
+        with:
+          publish-dir: "./build"
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"
