@@ -124,3 +124,25 @@ jobs:
           #delay: 3
           #procfile: web: yarn start
           #branch: main
+
+  deploy-ghpages-cloud:
+    needs: [test-unitaries, tests-e2e]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          cache: "yarn"
+          node-version: "14.17.0"
+      - name: Install Dependencies and Build
+        run: |
+          yarn install
+          yarn run build
+      - name: Deploy to GH-Pages Cloud
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          github_token: ${{ github.token }}
+          branch: gh-pages
+          folder: build
