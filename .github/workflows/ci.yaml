@@ -77,7 +77,7 @@ jobs:
           path: build
 
   test-unitaries:
-    needs: [ci-message-and-linter, build, snyk-monitor-clean-code-and-vulnerabilities]
+    needs: [ci-message-and-linter, build, monitor-clean-code-and-vulnerabilities]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
