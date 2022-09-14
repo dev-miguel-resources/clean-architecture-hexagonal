@@ -2,7 +2,7 @@
   "name": "hexagonal",
   "version": "0.1.5",
   "private": true,
-  "homepage": "https://dev-miguel-resources.github.io/react-advanced",
+  "homepage": "https://dev-miguel-resources.github.io/clean-architecture-hexagonal",
   "scripts": {
     "start": "env-cmd -f .env.local craco start",
     "build": "craco build",
