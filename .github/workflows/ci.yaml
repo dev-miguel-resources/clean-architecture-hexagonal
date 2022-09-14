@@ -146,3 +146,20 @@ jobs:
           github_token: ${{ github.token }}
           branch: gh-pages
           folder: build
+
+  deploy-netlify-cloud:
+    needs: [test-unitaries, tests-e2e]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Deploy to Netlify Cloud
+        if: ${{ github.event_name == 'push' }}
+        uses: nwtgck/actions-netlify@v1.2
+        with:
+          production-branch: main
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          timeout-minutes: 1
