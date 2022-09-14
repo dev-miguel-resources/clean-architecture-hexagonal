@@ -37,7 +37,7 @@ jobs:
       - name: Eslint verify rules
         run: yarn run lint
 
-  snyk-monitor-clean-code-and-vulnerabilities:
+  monitor-clean-code-and-vulnerabilities:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -50,7 +50,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - uses: actions/checkout@master
-      - name: Run Snyk to check for vulnerabilities
+      - name: Run Snyk to check for vulnerabilities and clean code
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
@@ -99,7 +99,7 @@ jobs:
         run: yarn run test
 
   tests-e2e:
-    needs: [ci-message-and-linter, build]
+    needs: [ci-message-and-linter, build, monitor-clean-code-and-vulnerabilities]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -125,7 +125,7 @@ jobs:
           wait-on: http://localhost:3000
 
   deploy-heroku-cloud:
-    needs: [test-unitaries, tests-e2e, snyk-monitor-clean-code-and-vulnerabilities]
+    needs: [test-unitaries, tests-e2e]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
