@@ -50,6 +50,8 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - uses: actions/checkout@master
+        #continue-on-error: true (true, si deseas que sigan los sgtes. jobs aunque se encuentren
+        #vulnerabilites, false si deseas que no).
       - name: Run Snyk to check for vulnerabilities and clean code
         uses: snyk/actions/node@master
         env:
@@ -138,12 +140,12 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-          procfile web: yarn start
           branch: main
           #healthcheck: "https://${{secrets.HEROKU_SERVER}}.herokuapp.com/health"
           #checkstring: "ok"
           #rollbackonhealthcheckfailed: true
           #delay: 3
+          #procfile web: yarn start (ya no se necesita esta propiedad desde CI en heroku)
 
   deploy-ghpages-cloud:
     needs: [test-unitaries, tests-e2e]
