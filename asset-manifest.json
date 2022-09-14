@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/react-advanced/static/css/main.b03c900f.css",
-    "main.js": "/react-advanced/static/js/main.94fda043.js",
-    "index.html": "/react-advanced/index.html",
-    "main.b03c900f.css.map": "/react-advanced/static/css/main.b03c900f.css.map",
-    "main.94fda043.js.map": "/react-advanced/static/js/main.94fda043.js.map"
+    "main.css": "/clean-architecture-hexagonal/static/css/main.b03c900f.css",
+    "main.js": "/clean-architecture-hexagonal/static/js/main.781c2098.js",
+    "index.html": "/clean-architecture-hexagonal/index.html",
+    "main.b03c900f.css.map": "/clean-architecture-hexagonal/static/css/main.b03c900f.css.map",
+    "main.781c2098.js.map": "/clean-architecture-hexagonal/static/js/main.781c2098.js.map"
   },
   "entrypoints": [
     "static/css/main.b03c900f.css",
-    "static/js/main.94fda043.js"
+    "static/js/main.781c2098.js"
   ]
 }
