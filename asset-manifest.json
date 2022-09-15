@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/clean-architecture-hexagonal/static/css/main.7d7c4d8d.css",
-    "main.js": "/clean-architecture-hexagonal/static/js/main.4d89db53.js",
+    "main.js": "/clean-architecture-hexagonal/static/js/main.930155bf.js",
     "index.html": "/clean-architecture-hexagonal/index.html",
     "main.7d7c4d8d.css.map": "/clean-architecture-hexagonal/static/css/main.7d7c4d8d.css.map",
-    "main.4d89db53.js.map": "/clean-architecture-hexagonal/static/js/main.4d89db53.js.map"
+    "main.930155bf.js.map": "/clean-architecture-hexagonal/static/js/main.930155bf.js.map"
   },
   "entrypoints": [
     "static/css/main.7d7c4d8d.css",
-    "static/js/main.4d89db53.js"
+    "static/js/main.930155bf.js"
   ]
 }
