@@ -12,7 +12,7 @@
     "test:coverage": "react-scripts test --coverage --watchAll",
     "teste2e:open": "npx cypress open",
     "test:e2e:run": "cypress run",
-    "format": "prettier --ignore-path .gitignore --write .",
+    "format": "prettier --ignore-path .gitignore node_modules --write .",
     "lint": "eslint . --ext .{js,ts,tsx}",
     "lint.fix": "npx eslint --fix .",
     "serve": "serve -s build",
